@@ -45,6 +45,7 @@
     aspect-ratio: 4 / 5;
     max-width: 380px;
     margin-left: auto;
+    margin-right: 24px;
     border-radius: 50%;
     overflow: hidden;
     animation: rise 0.9s ease 0.2s both;
@@ -265,6 +266,104 @@
     max-width: 440px;
     color: rgba(255, 255, 255, 0.9);
     margin: 0 0 40px;
+  }
+}
+
+.contact .primary-button {
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.contact-dialog {
+  width: min(560px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100% - 32px);
+  padding: clamp(24px, 5vw, 40px);
+  border: 0;
+  border-radius: 20px;
+  color: $ink;
+  background: $mint-100;
+  font-family: $font-body;
+
+  &::backdrop {
+    background: rgba(12, 42, 44, 0.72);
+    backdrop-filter: blur(4px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(12, 52, 54, 0.25);
+    border-radius: 50%;
+    color: $teal-900;
+    background: transparent;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  form {
+    display: grid;
+    gap: 12px;
+  }
+
+  label {
+    color: $teal-900;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(12, 52, 54, 0.25);
+    border-radius: 8px;
+    color: $ink;
+    background: #fff;
+    font: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .primary-button {
+    justify-self: start;
+    margin-top: 12px;
+    border-color: $teal-600;
+    color: $teal-600;
+  }
+
+  .primary-button__icon {
+    background: $teal-600;
+    color: #fff;
   }
 }
 
