@@ -1,0 +1,238 @@
+// Customizing Bootstrap with Sass variables:
+// https://getbootstrap.com/docs/5.0/customize/sass/
+
+// $primary: #276fc2;
+// $secondary: #e8d21d;
+// $border-radius: 1px;
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+$teal-900: #0c3436;
+$teal-700: #0f4a4d;
+$teal-600: #146366;
+$mint-300: #c4e3de;
+$mint-100: #e6f3f1;
+$ink: #0c2a2c;
+$sand: #e9d4b4;
+
+$font-display: 'DM Serif Display', Georgia, serif;
+$font-body: 'Manrope', system-ui, sans-serif;
+
+body {
+  font-family: $font-body;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $ink;
+  background: $mint-100;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+em {
+  font-style: italic;
+}
+
+.container {
+  max-width: 1200px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: $teal-600;
+
+  &::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  &--light {
+    color: $mint-300;
+  }
+}
+
+.section-title {
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.2;
+  margin: 0;
+  color: $ink;
+
+  &--light {
+    color: #fff;
+  }
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 8px 8px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  font-weight: 600;
+  color: #fff;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: #fff;
+    color: $teal-600;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    color: $teal-600;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover .primary-button__icon {
+    transform: translateX(4px);
+  }
+}
+
+// Header
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: $teal-600;
+  color: #fff;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  &__logo {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: 32px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  a {
+    position: relative;
+    padding: 4px 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.25s ease;
+    }
+
+    &:hover::after,
+    &:focus-visible::after,
+    &[aria-current='page']::after {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    gap: 16px;
+    font-size: 0.6875rem;
+  }
+}
+
+// Footer
+
+.site-footer {
+  background: $teal-900;
+  color: $mint-300;
+  font-size: 0.75rem;
+  padding: 24px 0;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__social {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(196, 227, 222, 0.4);
+  border-radius: 50%;
+  color: $mint-300;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: $mint-300;
+    border-color: $mint-300;
+    color: $teal-900;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
