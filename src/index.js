@@ -32,13 +32,15 @@ if (contactDialog instanceof HTMLDialogElement) {
       contactStatus.textContent = 'Deine Nachricht wird gesendet …';
 
       try {
+        const formData = new FormData(contactForm);
+        formData.set('_replyto', String(formData.get('email')));
         const response = await fetch(contactForm.action, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
           },
-          body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
+          body: JSON.stringify(Object.fromEntries(formData)),
         });
         const result = await response.json();
 
