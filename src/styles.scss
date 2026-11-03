@@ -311,6 +311,12 @@
     line-height: 1.15;
   }
 
+  &__status {
+    margin: 0;
+    color: $teal-700;
+    line-height: 1.5;
+  }
+
   &__close {
     display: inline-flex;
     align-items: center;
