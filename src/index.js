@@ -9,6 +9,24 @@ const contactTitle = contactDialog?.querySelector('#contact-dialog-title');
 const defaultContactTitle = contactTitle?.textContent;
 
 if (contactDialog instanceof HTMLDialogElement) {
+  const pageUrl = new URL(window.location.href);
+  const submissionSucceeded = pageUrl.searchParams.get('contact') === 'sent';
+
+  if (
+    submissionSucceeded &&
+    contactForm instanceof HTMLFormElement &&
+    contactStatus instanceof HTMLElement &&
+    contactTitle instanceof HTMLElement
+  ) {
+    contactForm.hidden = true;
+    contactTitle.textContent = 'Vielen Dank!';
+    contactStatus.hidden = false;
+    contactStatus.textContent = 'Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.';
+    pageUrl.searchParams.delete('contact');
+    window.history.replaceState({}, '', pageUrl);
+    contactDialog.showModal();
+  }
+
   contactOpenButton?.addEventListener('click', () => {
     if (contactForm instanceof HTMLFormElement && contactForm.hidden) {
       contactForm.reset();
@@ -38,68 +56,13 @@ if (contactDialog instanceof HTMLDialogElement) {
 
   if (contactForm instanceof HTMLFormElement && contactStatus instanceof HTMLElement) {
     contactForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      if (!(submitButton instanceof HTMLButtonElement)) return;
-
-      submitButton.disabled = true;
-      contactStatus.hidden = false;
-      contactStatus.textContent = 'Deine Nachricht wird gesendet …';
-
       const emailInput = contactForm.querySelector('input[name="email"]');
       const replyToInput = contactForm.querySelector('input[name="_replyto"]');
       if (!(emailInput instanceof HTMLInputElement) || !(replyToInput instanceof HTMLInputElement)) {
-        submitButton.disabled = false;
         console.error('Contact form email fields are missing.');
-        contactStatus.textContent = 'Das Formular ist gerade nicht verfügbar. Bitte lade die Seite neu.';
-        return;
+      } else {
+        replyToInput.value = emailInput.value;
       }
-      replyToInput.value = emailInput.value;
-
-      const iframe = document.createElement('iframe');
-      iframe.name = `contact-form-${Date.now()}`;
-      iframe.title = 'Kontaktformular-Übermittlung';
-      iframe.hidden = true;
-
-      let iframeReady = false;
-      let timeoutId;
-      const finish = () => {
-        clearTimeout(timeoutId);
-        iframe.remove();
-        contactForm.removeAttribute('target');
-        submitButton.disabled = false;
-      };
-      const showError = () => {
-        finish();
-        contactStatus.textContent = 'Das Senden hat leider nicht funktioniert. Bitte versuche es noch einmal.';
-      };
-
-      iframe.addEventListener('load', () => {
-        if (!iframeReady) {
-          iframeReady = true;
-          contactForm.target = iframe.name;
-          timeoutId = setTimeout(showError, 30000);
-
-          try {
-            HTMLFormElement.prototype.submit.call(contactForm);
-          } catch (error) {
-            console.error('Contact form submission failed:', error);
-            showError();
-          }
-          return;
-        }
-
-        finish();
-        contactForm.hidden = true;
-        if (contactTitle instanceof HTMLElement) {
-          contactTitle.textContent = 'Vielen Dank!';
-        }
-        contactStatus.textContent = 'Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.';
-      });
-
-      timeoutId = setTimeout(showError, 30000);
-      document.body.append(iframe);
     });
   }
 }
