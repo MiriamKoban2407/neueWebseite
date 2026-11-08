@@ -26,7 +26,7 @@
         <a href="index.html" class="site-header__logo">MK</a>
         <nav class="site-nav" aria-label="Hauptnavigation">
           <a href="index.html#ueber-mich">Über mich</a>
-          <a href="index.html#mein-weg">Mein Weg</a>
+          <a href="index.html#mein-weg">Mein Werdegang</a>
           <a href="portfolio.html" aria-current="page">Portfolio</a>
           <a href="index.html#kontakt">Kontakt</a>
         </nav>
@@ -34,21 +34,11 @@
     </header>
 
     <main>
-      <section class="portfolio-hero">
-        <div class="container">
-          <p class="eyebrow">Portfolio</p>
-          <h1 class="portfolio-hero__title">Ideen werden <em>sichtbar.</em></h1>
-          <p class="portfolio-hero__lead">
-            Eine Auswahl an Arbeiten und Projekten aus den Bereichen Journalismus, Kommunikation, Social Media und digitales Design.
-          </p>
-        </div>
-      </section>
-
       <section class="spotlight" aria-label="Projektspotlight">
         <div class="container">
           <div class="spotlight__head">
             <div>
-              <p class="eyebrow eyebrow--light">Projektspotlight</p>
+              <p class="eyebrow eyebrow--light">Portfolio</p>
               <h2 class="section-title section-title--light">Entdecke meine Arbeiten.</h2>
             </div>
             <p class="spotlight__counter" data-spotlight-counter></p>
@@ -68,15 +58,15 @@
         </div>
       </section>
 
-      <section class="projects">
+      <section class="projects" data-project-section>
         <div class="container">
           <div class="projects__head">
             <div>
-              <h2 class="section-title">Ausgewählte Arbeiten</h2>
+              <h2 class="section-title">Projektdetails</h2>
             </div>
             <p class="projects__count" data-project-count></p>
           </div>
-          <ol class="project-list" data-project-list></ol>
+          <div class="project-detail" data-project-detail></div>
         </div>
       </section>
 

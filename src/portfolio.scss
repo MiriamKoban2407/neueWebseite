@@ -9,39 +9,10 @@
   }
 }
 
-// Intro
-
-.portfolio-hero {
-  padding: 96px 0 72px;
-
-  &__title {
-    font-family: $font-display;
-    font-weight: 400;
-    font-size: clamp(3.5rem, 9vw, 7rem);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    margin: 0 0 32px;
-    color: $teal-900;
-
-    em {
-      color: $teal-600;
-    }
-  }
-
-  &__lead {
-    max-width: 520px;
-    margin: 0;
-    font-size: 1.0625rem;
-    color: $teal-700;
-  }
-}
-
-// Spotlight
-
 .spotlight {
   background: $teal-600;
   color: #fff;
-  padding: 96px 0;
+  padding: 48px 0 96px;
 
   .eyebrow {
     margin-bottom: 24px;
@@ -71,85 +42,44 @@
   }
 
   &__slide {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    width: 100%;
+    min-height: 280px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(28px, 7vw, 72px);
+    border: 0;
+    background: $teal-900;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
     animation: fade-in 0.5s ease both;
 
     &[hidden] {
       display: none;
     }
 
-    @media (min-width: 992px) {
-      grid-template-columns: 1.2fr 1fr;
+    &:hover .spotlight__title,
+    &:focus-visible .spotlight__title {
+      color: $mint-300;
     }
-  }
-
-  &__media {
-    position: relative;
-    min-height: 260px;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-    }
-  }
-
-  &__badge {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: $sand;
-    color: $teal-900;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  &__body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-  }
-
-  &__meta {
-    margin: 0 0 16px;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: $mint-300;
   }
 
   &__title {
     font-family: $font-display;
     font-weight: 400;
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
-    line-height: 1.2;
-    margin: 0 0 16px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    transition: color 0.25s ease;
   }
 
   &__summary {
-    margin: 0 0 32px;
+    max-width: 720px;
     color: rgba(255, 255, 255, 0.85);
-  }
-
-  &__link {
-    align-self: flex-start;
-    font-weight: 600;
-    border-bottom: 1px solid $mint-300;
-    padding-bottom: 4px;
-    transition: color 0.25s ease, border-color 0.25s ease;
-
-    &:hover,
-    &:focus-visible {
-      color: $mint-300;
-    }
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
   }
 
   &__controls {
@@ -194,6 +124,7 @@
     background: transparent;
     color: #fff;
     font-size: 1.125rem;
+    cursor: pointer;
     transition: background 0.25s ease, color 0.25s ease;
 
     &:hover,
@@ -202,13 +133,7 @@
       color: $teal-600;
     }
   }
-
-  button {
-    cursor: pointer;
-  }
 }
-
-// Project list
 
 .projects {
   padding: 96px 0;
@@ -219,7 +144,7 @@
     align-items: flex-end;
     flex-wrap: wrap;
     gap: 16px;
-    margin-bottom: 56px;
+    margin-bottom: 40px;
   }
 
   &__count {
@@ -231,34 +156,51 @@
   }
 }
 
-.project-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.project {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 24px;
-  padding: 40px 0;
-  border-top: 1px solid rgba(12, 52, 54, 0.15);
+.project-detail {
   scroll-margin-top: 96px;
 
-  &:last-child {
-    border-bottom: 1px solid rgba(12, 52, 54, 0.15);
+  &[hidden] {
+    display: none;
   }
 
-  @media (min-width: 768px) {
-    grid-template-columns: 96px 1fr;
-    gap: 32px;
+  &__article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    padding: 40px 0;
+    border-top: 1px solid rgba(12, 52, 54, 0.15);
+    animation: fade-in 0.4s ease both;
+    scroll-margin-top: 96px;
+
+    &--compact-media {
+      .project-detail__media-slide img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: 440px;
+        aspect-ratio: auto;
+        object-fit: contain;
+        margin-inline: auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      align-items: start;
+      gap: 56px;
+    }
   }
 
-  &__number {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: $teal-600;
-    letter-spacing: 0.08em;
+  &--media-left {
+    @media (min-width: 768px) {
+      .project-detail__copy {
+        order: 2;
+      }
+
+      .project-detail__media {
+        order: 1;
+      }
+    }
   }
 
   &__meta {
@@ -274,59 +216,87 @@
     font-weight: 400;
     font-size: clamp(2rem, 3.5vw, 2.75rem);
     line-height: 1.15;
-    margin: 0 0 16px;
+    margin: 0 0 24px;
   }
 
-  &__summary {
-    max-width: 640px;
-    margin: 0 0 16px;
-    color: $teal-900;
-  }
-
-  &__role {
+  &__description {
     margin: 0;
     color: $teal-900;
-
-    span {
-      font-weight: 600;
-    }
+    line-height: 1.75;
   }
 
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    margin: 24px 0 0;
-    padding: 0;
+  &__skills {
+    margin-top: 32px;
+
+    .eyebrow {
+      margin-bottom: 16px;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
     li {
       padding: 6px 14px;
       border: 1px solid $teal-600;
       border-radius: 999px;
       font-size: 0.6875rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       color: $teal-600;
     }
   }
 
-  &__videos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 32px;
+  &__media {
+    min-width: 0;
+  }
 
-    &:empty {
-      display: none;
+  &__media-carousel {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    align-items: center;
+    column-gap: 19px;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  &__media-slide {
+    margin: 0;
+
+    img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 16px;
+      background: $mint-300;
+    }
+
+    &--contain img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 560px;
+      aspect-ratio: auto;
+      object-fit: contain;
+      margin-inline: auto;
+    }
+
+    figcaption {
+      margin-top: 12px;
+      color: $teal-700;
+      font-size: 0.8125rem;
     }
   }
 
   &__video {
     position: relative;
-    width: 100%;
-    max-width: 320px;
+    width: min(100%, 320px);
     aspect-ratio: 9 / 16;
+    margin: 0 auto;
     border-radius: 16px;
     overflow: hidden;
     background: $teal-900;
@@ -339,9 +309,94 @@
       border: 0;
     }
   }
-}
 
-// Call to action
+  &__media-link {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 16px;
+    color: $teal-600;
+    font-size: 0.8125rem;
+    font-weight: 600;
+
+    &:hover,
+    &:focus-visible {
+      color: $teal-900;
+    }
+  }
+
+  &__media-controls {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__media-arrow {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $teal-900;
+    border-radius: 50%;
+    background: $teal-900;
+    color: #fff;
+    cursor: pointer;
+    justify-self: center;
+
+    &:hover,
+    &:focus-visible {
+      background: $teal-600;
+      border-color: $teal-600;
+    }
+  }
+
+  &__media-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__media-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(12, 52, 54, 0.3);
+    cursor: pointer;
+
+    &.is-active {
+      background: $teal-600;
+      transform: scale(1.35);
+    }
+  }
+
+  &__media-empty {
+    display: grid;
+    min-height: 240px;
+    place-items: center;
+    padding: 24px;
+    border-radius: 16px;
+    background: $mint-300;
+    color: $teal-700;
+    text-align: center;
+  }
+
+  &__back {
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid $teal-600;
+    background: transparent;
+    color: $teal-600;
+    font: inherit;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: $teal-900;
+    }
+  }
+}
 
 .cta {
   background: $teal-600;
@@ -362,17 +417,13 @@
 }
 
 @media (max-width: 575.98px) {
-  .portfolio-hero {
-    padding: 64px 0 48px;
-  }
-
   .spotlight,
   .projects,
   .cta {
     padding: 72px 0;
   }
 
-  .spotlight__body {
-    padding: 28px;
+  .spotlight__slide {
+    min-height: 240px;
   }
 }
